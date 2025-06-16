@@ -84,7 +84,7 @@ todoForm.onsubmit = (event) => {
     //Thêm task vào đầu danh sách công việc
     checkTrung();
     todoTasks.unshift(formData);
-    renderToast();
+    renderTask(todoTasks);
     renderToast("Thêm");
   }
 
@@ -218,7 +218,7 @@ function renderToast(message) {
   document.getElementById("toastContainer").appendChild(toast);
 
   // Tự xoá sau 3 giây
-  setTimeout(() => toast.remove(), 3000);
+  // setTimeout(() => toast.remove(), 3000);
 }
 
 const buttonTab = labelTab.querySelectorAll(".tab-button");
