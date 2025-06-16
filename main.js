@@ -35,7 +35,9 @@ function closeForm() {
   addtaskModal.querySelector(".modal").scrollTop = 0;
 
   editIndex = null;
+  todoForm.reset();
 }
+
 //hàm xử lý mở form
 function openForm() {
   addtaskModal.className = "modal-overlay show";
@@ -43,6 +45,36 @@ function openForm() {
     titleInput.focus();
   }, 100);
 }
+
+//Click ra ngoài thì tắt form:
+addtaskModal.addEventListener("click", (event) => {
+  // const rawformData = new FormData(todoForm);
+  const fieldNeedToCheck = todoForm.querySelectorAll(
+    ".form-input, .form-textarea"
+  );
+
+  const outsideClick = !event.target.closest(".modal");
+  const hasInput = Array.from(fieldNeedToCheck).some(
+    (field) => field.value.trim().length > 0
+  );
+  console.log(hasInput);
+  if (outsideClick) {
+    if (hasInput) {
+      if (
+        confirm(
+          "Đang có dữ liệu trong form, dữ liệu sẽ bị xoá khi bạn xác nhận huỷ!"
+        )
+      ) {
+        closeForm();
+      } else {
+        //không làm gì
+      }
+    } else {
+      closeForm();
+    }
+  }
+});
+
 //gọi sẵn hàm để hiện form ra cho dễ xử lý xong sẽ xoá:
 // openForm();
 
